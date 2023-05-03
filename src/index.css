@@ -4,7 +4,7 @@
 
 @layer base {
     body {
-        @apply font-['Inter',_sans-serif] font-normal text-[14px] leading-[17px] box-border
+        @apply font-['Inter',_sans-serif] font-normal text-sm box-border
     }
     button {
         @apply cursor-pointer

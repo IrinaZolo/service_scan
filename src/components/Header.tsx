@@ -32,7 +32,7 @@ export const Header = ({ auth, setAuth}: PropsType) => {
 
     const signIn = (
         <div className='hidden w-[230px] lg:w-[251px] md:flex justify-between justify-self-end'>
-            <Link to='/' className='self-center opacity-40 hover:opacity-100 text-[14px]'>Зарегистрироваться</Link>
+            <Link to='/' className='self-center opacity-40 hover:opacity-100'>Зарегистрироваться</Link>
             <span className='bg-[#029491] w-[2px]'></span>
             <button 
                 onClick={() => navigate('auth')}

@@ -19,16 +19,16 @@ export const MainPage = ({ auth, setAuth}: PropsType) => {
             <div className='flex flex-wrap gap-y-[23px] md:grid relative top-[25px] lg:top-[23px] md:grid-cols-[440px_1fr] lg:grid-cols-[535px_1fr] 
             xl:grid-cols-[645px_1fr] gap-x-[40px] justify-center'>
                 <div className='flex flex-col md:mt-[52px] max-w-[500px] lg:max-w-[700px]'>
-                    <h1 className='uppercase font-black text-[28px] leading-[33.6px] md:text-[32px] lg:text-[40px] lg:leading-[48px] 
+                    <h1 className='uppercase font-black text-2lg md:text-xl lg:text-2xl 
                     xl:text-[60px] xl:leading-[72px]'>
                         сервис по поиску <br /> публикаций <br /> о компании <br /> по его ИНН
                     </h1>
-                    <p className='text-[18px] leading-[22px] lg:text-[20px] lg:leading-[24px] md:max-w-[534px] mt-[15px]' >
+                    <p className='text-2base lg:text-3base md:max-w-[534px] mt-[15px]' >
                         Комплексный анализ публикаций, получение данных в формате PDF на электронную почту.
                     </p>
                    {auth && ( <button 
                         onClick={() => navigate('/search')}
-                        className='w-full md:w-[335px] h-[60px] rounded-[5px] bg-[#5970FF] text-white text-[20px] leading-[24px] lg:text-[22px] lg:leading-[27px] 
+                        className='w-full md:w-[335px] h-[60px] rounded-[5px] bg-[#5970FF] text-white text-3base lg:text-lg
                         font-medium mt-[32px] md:mt-[55px] lg:mt-[70px] hover:bg-[#1b32c6] hover:scale-[1.05] transition'>
                         Запросить данные
                     </button>)}

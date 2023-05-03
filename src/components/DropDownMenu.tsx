@@ -19,15 +19,15 @@ export const DropDownMenu = ({ setVisibleMenu, auth, setAuth, userName, userImg}
         <nav className='flex flex-col self-center items-center gap-[25px] mt-[38px] mb-[35px]'>
             <Link to='/' 
                 onClick={() => setVisibleMenu(false)}
-                className='text-white text-[16px] leading-[19px] hover:text-black hover:scale-[1.2] hover:opacity-25 transition'
+                className='text-white text-base hover:text-black hover:scale-[1.2] hover:opacity-25 transition'
             >Главная</Link>
             <Link to='/' 
                 onClick={() => setVisibleMenu(false)}
-                className='text-white text-[16px] leading-[19px] hover:text-black hover:scale-[1.2] hover:opacity-25 transition'
+                className='text-white text-base hover:text-black hover:scale-[1.2] hover:opacity-25 transition'
             >Тарифы</Link>
             <Link to='/' 
                 onClick={() => setVisibleMenu(false)}
-                className='text-white text-[16px] leading-[19px] hover:text-black hover:scale-[1.2] hover:opacity-25 transition'
+                className='text-white text-base hover:text-black hover:scale-[1.2] hover:opacity-25 transition'
             >FAQ</Link>
         </nav>
     )
@@ -41,11 +41,11 @@ export const DropDownMenu = ({ setVisibleMenu, auth, setAuth, userName, userImg}
         <div className='flex flex-col'>
             <Link to='/' 
                 onClick={() => setVisibleMenu(false)}
-                className='text-white text-[16px] leading-[19px] opacity-40 hover:text-black hover:scale-[1.2] transition self-center mt-[40px]'
+                className='text-white text-base opacity-40 hover:text-black hover:scale-[1.2] transition self-center mt-[40px]'
             >Зарегистрироваться</Link>
             <button
                 onClick={handleClickToAuth}
-                className='w-[295px] h-[52px] rounded-[5px] bg-[#7CE3E1] self-center text-[20px] leading-[24px] mt-[20px] hover:text-[rgb(41,138,135)] hover:scale-[1.1] transition '
+                className='w-[295px] h-[52px] rounded-[5px] bg-[#7CE3E1] self-center text-3base mt-[20px] hover:text-[rgb(41,138,135)] hover:scale-[1.1] transition '
             >
                 Войти
             </button>
@@ -60,7 +60,7 @@ export const DropDownMenu = ({ setVisibleMenu, auth, setAuth, userName, userImg}
     const buttonSignOut = (
         <button
                 onClick={handleClick}
-                className='w-[295px] h-[52px] rounded-[5px] bg-[#7CE3E1] self-center text-[20px] leading-[24px] mt-[20px] hover:text-[rgb(41,138,135)] hover:scale-[1.1] transition '
+                className='w-[295px] h-[52px] rounded-[5px] bg-[#7CE3E1] self-center text-3base mt-[20px] hover:text-[rgb(41,138,135)] hover:scale-[1.1] transition '
             >
                 Выйти
         </button>

@@ -80,7 +80,7 @@ export const WhyUsSlider = () => {
                         style={{transform: `translateX(${offset}px)`}}
                     >
                         <img src={card.icon} alt="" className='w-[64px] h-[64px] mt-[15px]'/>
-                        <p className='text-[18px] leading-[22px] mt-[15px]'>{card.description}</p>
+                        <p className='text-2base mt-[15px]'>{card.description}</p>
                     </div>
                 ))}
             </div>
@@ -94,7 +94,7 @@ export const WhyUsSlider = () => {
 
     return (
         <div className='relative mt-[85px] lg:mt-[140px] mb-[60px] flex flex-col gap-y-[20px] lg:gap-y-[50px] xs:self-center md:self-auto'  >
-            <h2 className='uppercase font-black text-[28px] leading-[34px] lg:text-[45px] lg:leading-[54px] xs:text-center 
+            <h2 className='uppercase font-black text-2lg lg:text-[45px] lg:leading-[54px] xs:text-center 
                 lg:text-start w-[250px] xs:w-auto'
             >
                 Почему именно мы

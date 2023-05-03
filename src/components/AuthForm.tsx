@@ -50,7 +50,7 @@ export const AuthForm = () => {
 
     const userInput = (
         <>
-            <label htmlFor="username" className='text-[16px] leading-[19px] text-[#949494]'>Логин или номер телефона:</label>
+            <label htmlFor="username" className='text-base text-[#949494]'>Логин или номер телефона:</label>
             <div className='relative flex flex-col'>
                 <input 
                     type="text" 
@@ -77,7 +77,7 @@ export const AuthForm = () => {
 
     const pwdInput = (
         <>
-            <label htmlFor="password" className='text-[16px] leading-[19px] text-[#949494]'>Пароль:</label>
+            <label htmlFor="password" className='text-base text-[#949494]'>Пароль:</label>
             <div className='relative flex flex-col'>
                 <input
                     type="password"
@@ -106,7 +106,7 @@ export const AuthForm = () => {
             { pwdInput }
             <button 
                 disabled={!validName || !validPwd ? true : false} 
-                className='mt-[17px] h-[60px] w-full text-center text-white text-[22px] leading-[27px] bg-[#5970FF] rounded-[5px] disabled:opacity-50'
+                className='mt-[17px] h-[60px] w-full text-center text-white text-lg bg-[#5970FF] rounded-[5px] disabled:opacity-50'
             >
                 Войти
             </button>
