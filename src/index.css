@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply font-['Inter',_sans-serif] font-normal text-[14px] leading-[17px] box-border
+    }
+    button {
+        @apply cursor-pointer
+    }
+    a {
+        @apply cursor-pointer
+    }
+    input {
+        @apply outline-none
+    }
+}
