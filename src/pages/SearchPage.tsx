@@ -2,7 +2,7 @@ import React from  'react'
 
 export const SearchPage = () => {
     return (
-        <main>
+        <main style={{minHeight: 'calc(100vh - 230px)'}}>
             <div className='relative'>
                 <h1 className='font-black uppercase text-2xl'>
                     Найдите необходимые данные в пару кликов.

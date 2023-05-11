@@ -1,14 +1,20 @@
-import React, { useState, useEffect, useRef } from  'react'
+import React, { useState, useEffect, useRef, FormEvent } from  'react'
+import { useNavigate } from 'react-router-dom';
+import { loginAction } from '../store/actions/authActions';
+import { useAppDispatch } from '../hooks/redux';
 
 export const AuthForm = () => {
 
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+
     const USER_REGEX: RegExp = /^[A-z][A-z0-9-_]{3,23}|^[0-9-+]{12}$/;
-    const PWD_REGEX: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{4,24}$/;
+    const PWD_REGEX: RegExp = /^(?=.*[a-zA-Z]).{4,24}$/;
 
     const userRef = useRef<HTMLInputElement>(null);
     const errRef = useRef<HTMLInputElement>(null);
 
-    const [user, setUser] = useState('+7');
+    const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
 
@@ -35,7 +41,7 @@ export const AuthForm = () => {
         setErrMsg('');
     }, [user, pwd])
 
-    const handleSubmit = async (e:InputEvent) => {
+    const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // if button enabled with JS hack
         const v1 = USER_REGEX.test(user);
@@ -44,8 +50,13 @@ export const AuthForm = () => {
             setErrMsg("Invalid Entry");
             return;
         }
-        console.log(user, pwd)
         setSuccess(true)
+        await dispatch(loginAction({
+            login: user,
+            password: pwd,
+        }))
+        navigate('/')
+
     }
 
     const userInput = (
@@ -101,10 +112,11 @@ export const AuthForm = () => {
     )
 
     return (
-        <form  action="" className='mt-[40px]'>
+        <form  action="" className='mt-[40px]' onClick={handleSubmit}>
             { userInput }
             { pwdInput }
             <button 
+                type='submit'
                 disabled={!validName || !validPwd ? true : false} 
                 className='mt-[17px] h-[60px] w-full text-center text-white text-lg bg-[#5970FF] rounded-[5px] disabled:opacity-50'
             >

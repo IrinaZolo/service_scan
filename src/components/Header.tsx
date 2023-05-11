@@ -2,15 +2,13 @@ import React, {useState} from  'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { DropDownMenu } from './DropDownMenu'
 import loadingImg from '../assets/loading.svg'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
+import { logout } from '../store/slices/authSlice'
 
-type PropsType = {
-    auth: boolean,
-    setAuth: React.Dispatch<React.SetStateAction<boolean>>,
-}
 
-export const Header = ({ auth, setAuth}: PropsType) => {
+export const Header = () => {
     
-    
+    const { isAuth } = useAppSelector(state => state.auth)
     const [ visibleMenu, setVisibleMenu ] = useState<boolean>(false) // fix видимость дроп-даун меню
     const [ loading ] = useState<Boolean>(false) // fix загрузка
     const usedCompanies: number = 34 // fix Использовано компаний 
@@ -18,7 +16,7 @@ export const Header = ({ auth, setAuth}: PropsType) => {
     const userName: string = 'Алексей А.' // fix Имя пользователя
 
     const navigate = useNavigate()
-
+    const dispatch = useAppDispatch()
     const logo: string = new URL('../assets/logo.jpg', import.meta.url).href
     const userImg: string = new URL('../assets/userImg.jpg', import.meta.url).href
 
@@ -77,7 +75,7 @@ export const Header = ({ auth, setAuth}: PropsType) => {
                     <h3>{userName}</h3>
                     <Link 
                         to='/' 
-                        onClick={() => setAuth(!auth)} 
+                        onClick={() => dispatch(logout())} 
                     >
                         <h5 className='text-[10px] leading-[12px] opacity-40 text-end hover:opacity-100'>Выйти</h5>
                     </Link>
@@ -88,8 +86,6 @@ export const Header = ({ auth, setAuth}: PropsType) => {
             {visibleMenu && (
                 <DropDownMenu 
                     setVisibleMenu={setVisibleMenu} 
-                    auth={auth} 
-                    setAuth={setAuth}
                     userName={userName}
                     userImg={userImg}
                 />
@@ -101,14 +97,12 @@ export const Header = ({ auth, setAuth}: PropsType) => {
         <header className='flex justify-between md:grid md:grid-cols-3 md:grid-rows-1 items-center w-full h-[93px] px-[15px] xl:px-[60px] md:py-[15px] py-[9px]'>
             <Link to='/'><img className='w-[111px] md:w-[141px]' src={logo} alt="Логотип"/></Link>
             {navigation}
-            {!auth && signIn}
-            {auth && userInfo}
-            {!auth && !visibleMenu && dropDownMenuButton}
+            {!isAuth && signIn}
+            {isAuth && userInfo}
+            {!isAuth && !visibleMenu && dropDownMenuButton}
             {visibleMenu && (
                 <DropDownMenu 
                     setVisibleMenu={setVisibleMenu} 
-                    auth={auth} 
-                    setAuth={setAuth} 
                     userName={userName}
                     userImg={userImg}
                 />

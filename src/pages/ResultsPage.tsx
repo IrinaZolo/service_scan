@@ -2,6 +2,6 @@ import React from  'react'
 
 export const ResultsPage = () => {
     return (
-        <div>results</div>
+        <div style={{minHeight: 'calc(100vh - 230px)'}}>results</div>
     )
 }

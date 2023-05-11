@@ -2,13 +2,12 @@ import React from  'react'
 import { useNavigate } from "react-router-dom"
 import { WhyUsSlider } from '../components/WhyUsSlider'
 import { OurRates } from '../components/OurRates'
+import { useAppSelector } from '../hooks/redux'
 
-type PropsType = {
-    auth: boolean,
-    setAuth: React.Dispatch<React.SetStateAction<boolean>>,
-}
 
-export const MainPage = ({ auth, setAuth}: PropsType) => {
+export const MainPage = () => {
+
+    const { isAuth } = useAppSelector(state => state.auth)
 
     const navigate = useNavigate()
 
@@ -26,7 +25,7 @@ export const MainPage = ({ auth, setAuth}: PropsType) => {
                     <p className='text-2base lg:text-3base md:max-w-[534px] mt-[15px]' >
                         Комплексный анализ публикаций, получение данных в формате PDF на электронную почту.
                     </p>
-                   {auth && ( <button 
+                   {isAuth && ( <button 
                         onClick={() => navigate('/search')}
                         className='w-full md:w-[335px] h-[60px] rounded-[5px] bg-[#5970FF] text-white text-3base lg:text-lg
                         font-medium mt-[32px] md:mt-[55px] lg:mt-[70px] hover:bg-[#1b32c6] hover:scale-[1.05] transition'>

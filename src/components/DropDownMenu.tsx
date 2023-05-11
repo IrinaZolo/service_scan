@@ -1,19 +1,22 @@
 import React from  'react'
 import { Link, useNavigate } from 'react-router-dom'
 import ButtonCross from '../assets/button-cross.svg'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
+import { logout } from '../store/slices/authSlice'
 
 type PropsType = {
     setVisibleMenu: React.Dispatch<React.SetStateAction<boolean>>,
-    auth: boolean,
-    setAuth: React.Dispatch<React.SetStateAction<boolean>>,
     userName: string,
     userImg: string
 }
 
-export const DropDownMenu = ({ setVisibleMenu, auth, setAuth, userName, userImg}: PropsType) => {
+export const DropDownMenu = ({ setVisibleMenu, userName, userImg}: PropsType) => {
+
+    const { isAuth } = useAppSelector(state => state.auth)
 
     const logoDropdownMenu: string = new URL('../assets/logo-DropDownMenu.png', import.meta.url).href
     const navigate = useNavigate()
+    const dispatch = useAppDispatch()
 
     const navigation = (
         <nav className='flex flex-col self-center items-center gap-[25px] mt-[38px] mb-[35px]'>
@@ -53,8 +56,9 @@ export const DropDownMenu = ({ setVisibleMenu, auth, setAuth, userName, userImg}
     )
 
     const handleClick = () => {
-        setAuth(false)
+        dispatch(logout())
         setVisibleMenu(false)
+        navigate('/')
     }
 
     const buttonSignOut = (
@@ -87,9 +91,9 @@ export const DropDownMenu = ({ setVisibleMenu, auth, setAuth, userName, userImg}
                 </button>
             </div>
             {navigation}
-            {!auth && signIn}
-            {auth && userInfo}
-            {auth && buttonSignOut}
+            {!isAuth && signIn}
+            {isAuth && userInfo}
+            {isAuth && buttonSignOut}
         </div>
     )
 }
