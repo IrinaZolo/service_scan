@@ -12,7 +12,7 @@
     a {
         @apply cursor-pointer
     }
-    input {
-        @apply outline-none
+    input, select {
+        @apply outline-none cursor-pointer
     }
 }
