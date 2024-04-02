@@ -4,7 +4,7 @@ import loadingImg from "../assets/loading.svg";
 import { DocumentData, IdsData, SearchDataResponse } from "../models/models";
 import { getDocumentsAction } from "../store/actions/getDocumentsAction";
 
-export const ResultsPage = () => {
+export function ResultsPage() {
   const documentsData: DocumentData[] = useAppSelector(
     (state) => state.search.documentsData
   );
@@ -111,4 +111,4 @@ export const ResultsPage = () => {
       )}
     </div>
   );
-};
+}
