@@ -9,7 +9,7 @@ interface ButtonBaseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export default function ButtonBase({
   className,
   children,
-  isLoading,
+  isLoading = false,
   ...props
 }: PropsWithChildren<ButtonBaseProps>) {
   return (

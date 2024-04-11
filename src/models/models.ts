@@ -2,6 +2,8 @@ export const ACCESS_KEY = "s-access";
 export const USERNAME_KEY = "s-login";
 export const EXPIRE_KEY = "s-expire";
 export const DOCS_KEY = "s-docs";
+export const SEARCH_KEY = "s-search-req";
+export const SEARCH_RESPONSE_KEY = "s-search-res";
 
 export interface AuthResponse {
   accessToken: string;
@@ -37,7 +39,7 @@ interface TargetSearchEntity {
   type: string;
   sparkId?: null | number;
   entityId?: null | number;
-  inn: number;
+  inn: number | null;
   maxFullness: boolean;
   inBusinessNews: null | boolean;
 }
@@ -53,7 +55,7 @@ export interface FullSearchData {
     targetSearchEntitiesContext: {
       targetSearchEntities: TargetSearchEntity[];
       onlyMainRole: boolean;
-      tonality: string;
+      tonality: "any" | "positive" | "negative";
       onlyWithRiskFactors: boolean;
       riskFactors: {
         and: [];
@@ -86,7 +88,7 @@ export interface FullSearchData {
     excludeDigests: boolean;
   };
   similarMode: string;
-  limit: number;
+  limit: number | null;
   sortType: string;
   sortDirectionType: string;
 }
@@ -134,14 +136,19 @@ export type ParamsType =
   | ParamsEnum.includeAnnouncementsAndCalendars
   | ParamsEnum.includeNewsReports;
 
-export const ParamsList: ParamsEnum[] = [
-  ParamsEnum.maxCompleteness,
-  ParamsEnum.businessContext,
-  ParamsEnum.mainRoleInPublication,
-  ParamsEnum.withRiskFactorsOnly,
-  ParamsEnum.includeTechnicalMarketNews,
-  ParamsEnum.includeAnnouncementsAndCalendars,
-  ParamsEnum.includeNewsReports,
+interface IParam {
+  id: number;
+  name: ParamsType;
+}
+
+export const ParamsList: IParam[] = [
+  { id: 1, name: ParamsEnum.maxCompleteness },
+  { id: 2, name: ParamsEnum.businessContext },
+  { id: 3, name: ParamsEnum.mainRoleInPublication },
+  { id: 4, name: ParamsEnum.withRiskFactorsOnly },
+  { id: 5, name: ParamsEnum.includeTechnicalMarketNews },
+  { id: 6, name: ParamsEnum.includeAnnouncementsAndCalendars },
+  { id: 7, name: ParamsEnum.includeNewsReports },
 ];
 
 interface SuggestedCompany {

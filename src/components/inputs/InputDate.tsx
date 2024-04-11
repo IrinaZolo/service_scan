@@ -1,13 +1,13 @@
 import { InputHTMLAttributes, useRef, useState } from "react";
 
-interface InputBaseProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputDateProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   dateValue: string;
   textValue: string;
   width?: string;
 }
 
-export default function InputDate({ className, ...props }: InputBaseProps) {
+export default function InputDate({ className, ...props }: InputDateProps) {
   const [inputArrowVisible, setInputArrowVisible] = useState<boolean>(true);
   const typeInputRef = useRef<HTMLInputElement>(null);
 
@@ -21,6 +21,7 @@ export default function InputDate({ className, ...props }: InputBaseProps) {
   return (
     <div className={`relative ${props.width} min-w-[152px]`}>
       <input
+        {...props}
         ref={typeInputRef}
         type={"text"}
         onFocus={changeInputType("date")}
@@ -33,7 +34,6 @@ export default function InputDate({ className, ...props }: InputBaseProps) {
           " w-[100%] h-[43px] border-[1px] rounded-[5px] shadow-[0px_0px_10px_rgba(0,0,0,0.05)] bg-transparent " +
           className
         }
-        {...props}
       />
       {inputArrowVisible && (
         <div

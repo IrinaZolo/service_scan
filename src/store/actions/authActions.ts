@@ -3,11 +3,7 @@ import { AuthData, AuthResponse } from "../../models/models";
 import { login } from "../slices/authSlice";
 import { AppDispatch } from "../store";
 
-export const loginAction = (
-  data: AuthData,
-  errorLogin: (err: any) => void,
-  successLogin: () => void
-) => {
+export const loginAction = (data: AuthData) => {
   return async (dispatch: AppDispatch) => {
     try {
       const response = await axios.post<AuthResponse>(
@@ -20,10 +16,9 @@ export const loginAction = (
           accessToken: response.data.accessToken,
         })
       );
-      successLogin();
+      return response;
     } catch (error) {
       console.log("Error login", error);
-      errorLogin(error);
     }
   };
 };

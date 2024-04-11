@@ -4,17 +4,23 @@ interface InputBaseProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
 
-export default function InputBase({ className, ...props }: InputBaseProps) {
+const InputBase = ({
+  className,
+  autoFocus = false,
+  ...props
+}: InputBaseProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
-    if (props.autoComplete) {
+    if (autoFocus) {
       inputRef?.current?.focus();
     }
-  });
+  }, [autoFocus]);
+
   return (
     <input
-      ref={inputRef}
       {...props}
+      ref={inputRef}
       className={
         (props.error
           ? "border-[#FF5959] shadow-[0px_0px_20px_rgba(255,89,89,0.2)]"
@@ -24,4 +30,5 @@ export default function InputBase({ className, ...props }: InputBaseProps) {
       }
     />
   );
-}
+};
+export default InputBase;
