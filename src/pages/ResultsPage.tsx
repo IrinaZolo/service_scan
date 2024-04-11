@@ -58,11 +58,6 @@ export function ResultsPage() {
       }
     }
 
-    console.log("page", page);
-    console.log("firstID", firstID);
-    console.log("lastID", lastID);
-    console.log("length", data.ids.length);
-
     const currentData: IdsData = {
       ids: data.ids.slice(firstID, lastID),
     };
@@ -84,7 +79,6 @@ export function ResultsPage() {
 
   useEffect(() => {
     if (!documentsData.length) {
-      console.log("useeffect");
       getDocuments();
     }
   }, []);
