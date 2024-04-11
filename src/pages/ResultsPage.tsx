@@ -33,7 +33,6 @@ export function ResultsPage() {
   ).href;
 
   const getDocuments = useCallback(() => {
-    console.log("searchData", searchData);
     if (!searchData?.items) {
       setIsLoading(false);
       return;
