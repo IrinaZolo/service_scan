@@ -13,47 +13,40 @@ export const AuthPage = () => {
   ).href;
   const lock: string = new URL("../assets/lock.png", import.meta.url).href;
 
-  const handleChange = () => {
-    setTabSignIn(!tabSignIn);
-  };
+  function toggleTabSignIn() {
+    setTabSignIn(true);
+  }
+
+  function toggleTabAuth() {
+    setTabSignIn(false);
+  }
+
+  const tabButtonStyle: string =
+    "h-[35px] pb-[5px] border-b-2 hover:border-[#029491] hover:text-[#029491] xl:text-base text-center cursor-pointer transition-all";
 
   const tabs = (
     <div className="flex justify-between">
-      <input
-        type="radio"
-        name="tab-btn"
-        id="tab-btn-1"
-        value=""
-        className="hidden "
-        onChange={handleChange}
-        checked={tabSignIn}
-      />
-      <label
-        onClick={() => setTabSignIn(true)}
-        htmlFor="tab-btn-1"
-        className="h-[30px] px-[10%] xl:px-[13%] border-b-2 border-[#C7C7C7] hover:border-[#029491] text-[#C7C7C7] hover:text-[#029491] 
-                            xl:text-base text-center cursor-pointer"
-        style={tabSignIn ? { color: "#029491", borderColor: "#029491" } : {}}
+      <button
+        onClick={toggleTabSignIn}
+        className={`${tabButtonStyle} px-[10%] xl:px-[13%] ${
+          tabSignIn
+            ? "text-[#029491] border-[#029491]"
+            : "text-[#C7C7C7] border-[#C7C7C7]"
+        }`}
       >
         Войти
-      </label>
-      <input
-        type="radio"
-        name="tab-btn"
-        id="tab-btn-2"
-        value=""
-        className="hidden"
-        onChange={handleChange}
-        checked={!tabSignIn}
-      />
-      <label
-        htmlFor="tab-btn-2"
-        className="h-[30px] px-[6.5%] border-b-2 border-[#C7C7C7] hover:border-[#029491] text-[#C7C7C7] hover:text-[#029491] 
-                             xl:text-base text-center cursor-pointer"
-        style={!tabSignIn ? { color: "#029491", borderColor: "#029491" } : {}}
+      </button>
+
+      <button
+        onClick={toggleTabAuth}
+        className={`${tabButtonStyle} px-[6.5%] ${
+          !tabSignIn
+            ? "text-[#029491] border-[#029491]"
+            : "text-[#C7C7C7] border-[#C7C7C7]"
+        }`}
       >
         Зарегистрироваться
-      </label>
+      </button>
     </div>
   );
 
@@ -69,7 +62,7 @@ export const AuthPage = () => {
           className="w-[322px] ml-[110px] hidden lg:block"
         />
       </div>
-      <div className="relative flex flex-col mt-[135px] lg:mt-0 max-w-[335px] h-[504px] xl:min-w-[430px] lg:h-[523px] shadow-[0px_0px_20px_rgba(0,0,0,0.15)] p-[15px] xl:p-[25px] rounded-[10px]">
+      <div className="relative flex flex-col mt-[135px] lg:mt-0 w-[335px] min-w-[335px] lg:w-auto h-[504px] xl:min-w-[430px] lg:h-[523px] shadow-[0px_0px_20px_rgba(0,0,0,0.15)] p-[15px] xl:p-[25px] rounded-[10px]">
         <img
           src={lock}
           alt=""

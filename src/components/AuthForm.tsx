@@ -46,24 +46,17 @@ export const AuthForm = () => {
 
   const onSubmit = async (model: AuthData) => {
     setIsLoading(true);
-    function successLogin() {
-      setIsLoading(false);
-      navigate("/");
-    }
-    function errorLogin(error: any) {
-      setIsLoading(false);
-      console.log("error2 ", error);
-    }
-    await dispatch(
-      loginAction(
-        {
-          login: model.login,
-          password: model.password,
-        },
-        errorLogin,
-        successLogin
-      )
-    );
+
+    dispatch(
+      loginAction({
+        login: model.login,
+        password: model.password,
+      })
+    )
+      .then(() => {
+        navigate("/");
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const userInput = (

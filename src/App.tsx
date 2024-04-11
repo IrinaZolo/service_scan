@@ -23,14 +23,24 @@ function App() {
               <Route path="/results" element={<ResultsPage />} />
             </>
           ) : (
-            <Route
-              path={"/search" && "/results"}
-              element={
-                <p style={{ height: "calc(100vh - 230px)" }}>
-                  Страница недоступна. Вернитесь на главную страницу.
-                </p>
-              }
-            />
+            <>
+              <Route
+                path={"/search"}
+                element={
+                  <p style={{ height: "calc(100vh - 230px)" }}>
+                    Страница недоступна. Вернитесь на главную страницу.
+                  </p>
+                }
+              />
+              <Route
+                path={"/results"}
+                element={
+                  <p style={{ height: "calc(100vh - 230px)" }}>
+                    Страница недоступна. Вернитесь на главную страницу.
+                  </p>
+                }
+              />
+            </>
           )}
         </Routes>
       </main>

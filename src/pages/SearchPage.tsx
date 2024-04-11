@@ -24,12 +24,37 @@ export const SearchPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const token = useAppSelector((state) => state.auth.accessToken);
+  const searchRequest: FullSearchData = useAppSelector(
+    (state) => state.search.searchRequest
+  );
 
-  const [startDateValue, setStartDateValue] = useState<string>("");
-  const [startDateTextValue, setStartDateTextValue] = useState<string>("");
+  const [tonality, setTonality] = useState<
+    FullSearchData["searchContext"]["targetSearchEntitiesContext"]["tonality"]
+  >(
+    searchRequest?.searchContext?.targetSearchEntitiesContext?.tonality || "any"
+  );
 
-  const [endDateValue, setEndDateValue] = useState<string>("");
-  const [endDateTextValue, setEndDateTextValue] = useState<string>("");
+  const [startDateValue, setStartDateValue] = useState<string>(
+    searchRequest?.issueDateInterval?.startDate
+      ? moment(searchRequest.issueDateInterval.startDate).format("YYYY.MM.DD")
+      : ""
+  );
+  const [startDateTextValue, setStartDateTextValue] = useState<string>(
+    searchRequest?.issueDateInterval?.startDate
+      ? moment(searchRequest.issueDateInterval.startDate).format("DD.MM.YYYY")
+      : ""
+  );
+
+  const [endDateValue, setEndDateValue] = useState<string>(
+    searchRequest?.issueDateInterval?.endDate
+      ? moment(searchRequest.issueDateInterval.endDate).format("YYYY.MM.DD")
+      : ""
+  );
+  const [endDateTextValue, setEndDateTextValue] = useState<string>(
+    searchRequest?.issueDateInterval?.endDate
+      ? moment(searchRequest.issueDateInterval.endDate).format("DD.MM.YYYY")
+      : ""
+  );
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -110,6 +135,18 @@ export const SearchPage = () => {
 
   const searchForm = useForm<SearchData>({
     mode: "all",
+    defaultValues: {
+      inn: searchRequest?.searchContext?.targetSearchEntitiesContext
+        ?.targetSearchEntities[0].inn
+        ? formattedInnValue(
+            String(
+              searchRequest?.searchContext?.targetSearchEntitiesContext
+                ?.targetSearchEntities[0].inn
+            )
+          )
+        : "",
+      limit: searchRequest?.limit ? String(searchRequest?.limit) : "",
+    },
     resolver: yupResolver(searchSchema),
   });
 
@@ -132,6 +169,13 @@ export const SearchPage = () => {
       });
     }
   }, [endDateValue, startDateValue, register]);
+
+  function toggleTonality(e: ChangeEvent<HTMLSelectElement>) {
+    setTonality(
+      e.target
+        .value as FullSearchData["searchContext"]["targetSearchEntitiesContext"]["tonality"]
+    );
+  }
 
   function onChange(dateType: "start" | "end") {
     return (e: ChangeEvent<HTMLInputElement>) => {
@@ -171,14 +215,6 @@ export const SearchPage = () => {
 
   async function onSubmit(model: SearchData) {
     setIsLoading(true);
-    function successSearch() {
-      setIsLoading(false);
-      navigate("/results");
-    }
-    function errorSearch(error: any) {
-      setIsLoading(false);
-      console.log("error search 2", error);
-    }
 
     const data: FullSearchData = {
       intervalType: "month",
@@ -198,7 +234,7 @@ export const SearchPage = () => {
             },
           ],
           onlyMainRole: true,
-          tonality: "any",
+          tonality: tonality,
           onlyWithRiskFactors: false,
           riskFactors: {
             and: [],
@@ -236,9 +272,13 @@ export const SearchPage = () => {
       sortDirectionType: "asc",
     };
 
-    console.log(data);
-
-    dispatch(searchAction(data, errorSearch, successSearch, token));
+    dispatch(searchAction(data, token))
+      .then((res) => {
+        if (res?.data) {
+          navigate("/results");
+        }
+      })
+      .finally(() => setIsLoading(false));
   }
 
   return (
@@ -254,7 +294,7 @@ export const SearchPage = () => {
         <div className="flex flex-col md:w-[700px] lg:w-[800px] 2xl:w-[872px] md:flex-row rounded-[10px] mt-[15px] lg:mt-[27px] p-[25px] lg:p-[35px] shadow-[0px_0px_20px_rgba(0,0,0,0.20)] text-2base">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col md:flex-row "
+            className="flex flex-col md:flex-row w-full"
           >
             <div className="flex flex-col w-full">
               <label htmlFor="inn-company">
@@ -302,11 +342,12 @@ export const SearchPage = () => {
                 id="tonality"
                 width="w-[100%] md:w-[60%]"
                 className="mt-[20px] mb-[30px] text-sm"
-                defaultValue={"Любая"}
+                value={tonality}
+                onChange={toggleTonality}
               >
-                <option value="Позитивная">Позитивная</option>
-                <option value="Негативная">Негативная</option>
-                <option value="Любая">Любая</option>
+                <option value="positive">Позитивная</option>
+                <option value="negative">Негативная</option>
+                <option value="any">Любая</option>
               </InputSelect>
               <label htmlFor="qty-docs">
                 Количество документов в выдаче{" "}
@@ -402,11 +443,12 @@ export const SearchPage = () => {
               <div className="text-sm hidden md:block lg:text-base 2xl:text-2base mt-[6px]">
                 {ParamsList.map((param) => (
                   <InputCheckbox
-                    onChange={onChangeParams(param)}
-                    isChecked={checkedParams[param]}
-                    name={param}
+                    key={param.id}
+                    onChange={onChangeParams(param.name)}
+                    isChecked={checkedParams[param.name]}
+                    name={param.name}
                   >
-                    {param}
+                    {param.name}
                   </InputCheckbox>
                 ))}
               </div>

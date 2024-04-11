@@ -3,6 +3,8 @@ import {
   ACCESS_KEY,
   DOCS_KEY,
   EXPIRE_KEY,
+  SEARCH_KEY,
+  SEARCH_RESPONSE_KEY,
   USERNAME_KEY,
 } from "../../models/models";
 
@@ -16,9 +18,7 @@ function getInitialState(): AuthState {
   const expireIn = localStorage.getItem(EXPIRE_KEY) ?? null;
 
   if (expireIn && new Date() > new Date(expireIn)) {
-    localStorage.removeItem(ACCESS_KEY);
-    localStorage.removeItem(USERNAME_KEY);
-    localStorage.removeItem(EXPIRE_KEY);
+    localStorage.clear();
 
     return {
       accessToken: "",
@@ -61,10 +61,7 @@ export const authSlice = createSlice({
       state.login = "";
       state.isAuth = false;
 
-      localStorage.removeItem(ACCESS_KEY);
-      localStorage.removeItem(USERNAME_KEY);
-      localStorage.removeItem(EXPIRE_KEY);
-      localStorage.removeItem(DOCS_KEY);
+      localStorage.clear();
     },
   },
 });
