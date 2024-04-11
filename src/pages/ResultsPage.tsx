@@ -84,10 +84,8 @@ export function ResultsPage() {
 
   useEffect(() => {
     if (!documentsData.length) {
-      return () => {
-        console.log("useeffect");
-        getDocuments();
-      };
+      console.log("useeffect");
+      getDocuments();
     }
   }, []);
 
