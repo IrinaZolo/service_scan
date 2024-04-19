@@ -35,6 +35,19 @@ export interface IRates {
   textColor: string;
 }
 
+interface IDateState {
+  dateValue: string;
+  textValue: string;
+}
+
+export interface ISearchState {
+  tonality: FullSearchData["searchContext"]["targetSearchEntitiesContext"]["tonality"];
+  startDate: IDateState;
+  endDate: IDateState;
+  checkedParams: Record<ParamsType, boolean>;
+  isLoading: boolean;
+}
+
 interface TargetSearchEntity {
   type: string;
   sparkId?: null | number;

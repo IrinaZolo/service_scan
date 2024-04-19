@@ -11,6 +11,7 @@ export const AuthPage = () => {
     "../assets/Characters.jpg",
     import.meta.url
   ).href;
+
   const lock: string = new URL("../assets/lock.png", import.meta.url).href;
 
   function toggleTabSignIn() {
@@ -36,7 +37,6 @@ export const AuthPage = () => {
       >
         Войти
       </button>
-
       <button
         onClick={toggleTabAuth}
         className={`${tabButtonStyle} px-[6.5%] ${
