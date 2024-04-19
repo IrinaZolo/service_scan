@@ -114,10 +114,7 @@ export function ResultsPage() {
   }
 
   return (
-    <main
-      style={{ minHeight: "calc(100vh - 230px)" }}
-      className="px-[15px] xl:px-[45px] 2xl:px-[15px] flex flex-col"
-    >
+    <main className="px-[15px] xl:px-[45px] 2xl:px-[15px] flex flex-col">
       <div className="flex flex-col items-center md:items-start  md:flex-row justify-between mt-[10px] md:mt-[25px]">
         <div className="max-w-[450px] pt-[15px] md:pt-[45px]">
           <h1 className="mb-4 text-3base xl:text-xl uppercase font-black">

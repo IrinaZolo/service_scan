@@ -6,6 +6,9 @@
     body {
         @apply font-['Inter',_sans-serif] font-normal text-sm box-border
     }
+    main {
+        @apply min-h-[calc(100vh-230px)]
+    }
     button {
         @apply cursor-pointer
     }
